@@ -55,14 +55,14 @@ jobs:
           # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
           # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/luci-app-passwall2
           # git clone https://github.com/sbwml/luci-app-alist package/alist
-          mkdir package/luci-app-openclash
-          cd package/luci-app-openclash
-          git init
-          git remote add -f origin https://github.com/vernesong/OpenClash.git
-          git config core.sparsecheckout true
-          echo "luci-app-openclash" >> .git/info/sparse-checkout
-          git pull origin master
-          git branch --set-upstream-to=origin/master master
+          # mkdir package/luci-app-openclash
+          # cd package/luci-app-openclash
+          # git init
+          # git remote add -f origin https://github.com/vernesong/OpenClash.git
+          # git config core.sparsecheckout true
+          # echo "luci-app-openclash" >> .git/info/sparse-checkout
+          # git pull origin master
+          # git branch --set-upstream-to=origin/master master
           
       - name: Update feeds
         run: |
@@ -129,18 +129,18 @@ jobs:
           # CONFIG_PACKAGE_luci-app-clash=y
           # CONFIG_PACKAGE_luci-app-cifsd=y
           cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-openclash=y
+          # CONFIG_PACKAGE_luci-app-openclash=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=n
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan-go=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan-go=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
@@ -183,7 +183,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-aria2=y
           CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
-          # CONFIG_PACKAGE_luci-app-uugamebooster=y
+          CONFIG_PACKAGE_luci-app-uugamebooster=y
           # CONFIG_PACKAGE_luci-app-wrtbwmon=y
           # CONFIG_PACKAGE_luci-app-smartdns=y
           # CONFIG_PACKAGE_luci-app-gost=y
