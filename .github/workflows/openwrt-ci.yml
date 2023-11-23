@@ -151,9 +151,9 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
           # CONFIG_PACKAGE_luci-app-ssr-mudb-server=y
-          # CONFIG_PACKAGE_luci-app-passwall=y
+          CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall2=y
-          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria=y
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria=y
           CONFIG_PACKAGE_luci-app-diskman=y
           CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
           CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
@@ -170,9 +170,9 @@ jobs:
           # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_PDNSD=y
           # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSFORWARDER=y
           # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSPROXY=y
-          # CONFIG_PACKAGE_alist=y
-          # CONFIG_PACKAGE_luci-app-alist=y
-          # CONFIG_PACKAGE_luci-i18n-alist-zh-cn=y
+          CONFIG_PACKAGE_alist=y
+          CONFIG_PACKAGE_luci-app-alist=y
+          CONFIG_PACKAGE_luci-i18n-alist-zh-cn=y
           # CONFIG_PACKAGE_luci-app-nfs=y
           # CONFIG_PACKAGE_luci-app-minidlna=y
           # CONFIG_PACKAGE_luci-app-baidupcs-web=y
@@ -180,7 +180,7 @@ jobs:
           # CONFIG_PACKAGE_kmod-tun=y
           # CONFIG_PACKAGE_wget-nossl=y
           # CONFIG_PACKAGE_wget-ssl=y
-          # CONFIG_PACKAGE_luci-app-usb-printer=y
+          CONFIG_PACKAGE_luci-app-usb-printer=y
           CONFIG_PACKAGE_luci-app-openvpn-server=y
           # CONFIG_PACKAGE_luci-app-cifs-mount=y
           # CONFIG_PACKAGE_open-vm-tools=y
