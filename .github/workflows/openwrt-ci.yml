@@ -135,7 +135,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-clash=y
           # CONFIG_PACKAGE_luci-app-cifsd=y
           cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-openclash=y
+          # CONFIG_PACKAGE_luci-app-openclash=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
