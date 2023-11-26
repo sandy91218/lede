@@ -51,9 +51,13 @@ jobs:
 
       - name: 自定义插件
         run: |
+          cd package/luci-app-msd_lite
+          cd package/msd_lite
+          cd package/luci-app-airconnect
           git clone https://github.com/kenzok8/small-package/luci-app-msd_lite package/luci-app-msd_lite
           git clone https://github.com/kenzok8/small-package/msd_lite package/msd_lite
           git clone https://github.com/kenzok8/small-package/luci-app-airconnect package/luci-app-airconnect
+          git pull
           rm -rf package/helloworld
           git clone --depth=1 -b main https://github.com/fw876/helloworld.git package/helloworld
           git -C package/helloworld pull origin main
