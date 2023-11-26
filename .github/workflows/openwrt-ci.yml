@@ -54,8 +54,8 @@ jobs:
           rm -rf package/helloworld
           git clone --depth=1 -b main https://github.com/fw876/helloworld.git package/helloworld
           git -C package/helloworld pull origin main
-          git clone https://github.com/xiaorouji/openwrt-passwall2.git package/luci-app-passwall2
-          git clone https://github.com/sbwml/luci-app-alist package/alist
+          # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/luci-app-passwall2
+          # git clone https://github.com/sbwml/luci-app-alist package/alist
           mkdir package/luci-app-openclash
           cd package/luci-app-openclash
           git init
