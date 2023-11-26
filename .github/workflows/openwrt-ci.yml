@@ -94,6 +94,16 @@ jobs:
           echo "luci-app-airconnect" >> .git/info/sparse-checkout
           git pull origin main:master
           git branch --set-upstream-to=origin/main master
+          cd ../
+          cd ../
+          mkdir package/airconnect
+          cd package/airconnect
+          git init
+          git remote add -f origin https://github.com/kenzok8/small-package.git
+          git config core.sparsecheckout true
+          echo "airconnect" >> .git/info/sparse-checkout
+          git pull origin main:master
+          git branch --set-upstream-to=origin/main master
           
       - name: Update feeds
         run: |
@@ -232,6 +242,7 @@ jobs:
           CONFIG_PACKAGE_msd_lite=y
           CONFIG_PACKAGE_luci-i18n-msd_lite=y
           CONFIG_PACKAGE_luci-app-airconnect=y
+          CONFIG_PACKAGE_airconnect=y
           CONFIG_PACKAGE_luci-app-uhttpd=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-pptp-server=y
