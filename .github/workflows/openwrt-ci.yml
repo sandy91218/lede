@@ -66,22 +66,22 @@ jobs:
           git branch --set-upstream-to=origin/master master
           cd ../
           cd ../
-          mkdir package/luci-app-msd_lite
-          cd package/luci-app-msd_lite
-          git init
-          git remote add -f origin https://github.com/kenzok8/small-package.git
-          git config core.sparsecheckout true
-          echo "luci-app-msd_lite" >> .git/info/sparse-checkout
-          git pull origin main:master
-          git branch --set-upstream-to=origin/main master
-          cd ../
-          cd ../
           mkdir package/msd_lite
           cd package/msd_lite
           git init
           git remote add -f origin https://github.com/kenzok8/small-package.git
           git config core.sparsecheckout true
           echo "msd_lite" >> .git/info/sparse-checkout
+          git pull origin main:master
+          git branch --set-upstream-to=origin/main master
+          cd ../
+          cd ../
+          mkdir package/luci-app-msd_lite
+          cd package/luci-app-msd_lite
+          git init
+          git remote add -f origin https://github.com/kenzok8/small-package.git
+          git config core.sparsecheckout true
+          echo "luci-app-msd_lite" >> .git/info/sparse-checkout
           git pull origin main:master
           git branch --set-upstream-to=origin/main master
           cd ../
@@ -238,9 +238,9 @@ jobs:
           # CONFIG_PACKAGE_luci-app-gost=y
           # CONFIG_PACKAGE_luci-app-advancedsetting=y
           # CONFIG_PACKAGE_uugamebooster=y
-          CONFIG_PACKAGE_luci-app-msd_lite=y
           CONFIG_PACKAGE_msd_lite=y
-          # CONFIG_PACKAGE_luci-i18n-msd_lite=y
+          CONFIG_PACKAGE_luci-app-msd_lite=y
+          CONFIG_PACKAGE_luci-i18n-msd_lite=y
           CONFIG_PACKAGE_luci-app-airconnect=y
           CONFIG_PACKAGE_airconnect=y
           CONFIG_PACKAGE_luci-app-uhttpd=y
