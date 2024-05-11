@@ -64,53 +64,14 @@ jobs:
           echo "luci-app-openclash" >> .git/info/sparse-checkout
           git pull origin master
           git branch --set-upstream-to=origin/master master
-          # cd ../
-          # cd ../
-          # mkdir package/msd_lite
-          # cd package/msd_lite
-          # git init
-          # git remote add -f origin https://github.com/kenzok8/small-package.git
-          # git config core.sparsecheckout true
-          # echo "msd_lite" >> .git/info/sparse-checkout
-          # git pull origin main:master
-          # git branch --set-upstream-to=origin/main master
-          # cd ../
-          # cd ../
-          # mkdir package/luci-app-msd_lite
-          # cd package/luci-app-msd_lite
-          # git init
-          # git remote add -f origin https://github.com/kenzok8/small-package.git
-          # git config core.sparsecheckout true
-          # echo "luci-app-msd_lite" >> .git/info/sparse-checkout
-          # git pull origin main:master
-          # git branch --set-upstream-to=origin/main master
-          # cd ../
-          # cd ../
-          # mkdir package/luci-app-airconnect
-          # cd package/luci-app-airconnect
-          # git init
-          # git remote add -f origin https://github.com/kenzok8/small-package.git
-          # git config core.sparsecheckout true
-          # echo "luci-app-airconnect" >> .git/info/sparse-checkout
-          # git pull origin main:master
-          # git branch --set-upstream-to=origin/main master
-          # cd ../
-          # cd ../
-          # mkdir package/airconnect
-          # cd package/airconnect
-          # git init
-          # git remote add -f origin https://github.com/kenzok8/small-package.git
-          # git config core.sparsecheckout true
-          # echo "airconnect" >> .git/info/sparse-checkout
-          # git pull origin main:master
-          # git branch --set-upstream-to=origin/main master
+         
           
       - name: Update feeds
         run: |
           # sed -i '$a src-git smpackage https://github.com/kenzok8/small-package/luci-app-msd_lite' feeds.conf.default
           # rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-          sed -i '$a src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git' feeds.conf.default
-          sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
+          # sed -i '$a src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git' feeds.conf.default
+          # sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
           # sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
           # sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2' feeds.conf.default
