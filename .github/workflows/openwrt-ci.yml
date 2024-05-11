@@ -141,7 +141,7 @@ jobs:
           
           # 多文件系统支持:
           cat >> .config <<EOF
-          # CONFIG_TESTING_KERNEL=y
+          CONFIG_TESTING_KERNEL=y
           CONFIG_PACKAGE_kmod-fs-nfs=y
           CONFIG_PACKAGE_kmod-fs-nfs-common=y
           CONFIG_PACKAGE_kmod-fs-nfs-v3=y
@@ -194,7 +194,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
           # CONFIG_PACKAGE_luci-app-ssr-mudb-server=y
-          CONFIG_PACKAGE_luci-app-passwall=y
+          # CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall2=y
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria=y
           CONFIG_PACKAGE_luci-app-diskman=y
@@ -230,7 +230,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ramfree=y
           # CONFIG_PACKAGE_luci-app-advancedsetting=y
           # CONFIG_PACKAGE_luci-app-aria2=y
-          # CONFIG_PACKAGE_luci-app-webadmin=y
+          CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-uugamebooster=y
           # CONFIG_PACKAGE_luci-app-wrtbwmon=y
