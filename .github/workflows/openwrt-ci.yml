@@ -61,9 +61,9 @@ jobs:
           # git -C package/helloworld pull origin main
           # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/luci-app-passwall2
           # git clone https://github.com/sbwml/luci-app-alist package/alist
-          mkdir package/luci-app-openclash
-          cd package/luci-app-openclash
-          git clone --depth=1 https://github.com/vernesong/OpenClash.git
+          # mkdir package/luci-app-openclash
+          # cd package/luci-app-openclash
+          # git clone --depth=1 https://github.com/vernesong/OpenClash.git
           # git init
           # git remote add -f origin https://github.com/vernesong/OpenClash.git
           # git config core.sparsecheckout true
@@ -155,7 +155,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-clash=y
           # CONFIG_PACKAGE_luci-app-cifsd=y
           cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-openclash=y
+          # CONFIG_PACKAGE_luci-app-openclash=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
@@ -277,19 +277,19 @@ jobs:
           cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
       - name: Upload buildinfo
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_buildinfo
           path: ./artifact/buildinfo/
 
       - name: Upload package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_package
           path: ./artifact/package/
 
       - name: Upload firmware
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_firmware
           path: ./bin/targets/
