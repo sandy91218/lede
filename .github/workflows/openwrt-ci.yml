@@ -59,16 +59,16 @@ jobs:
           # rm -rf package/helloworld
           # git clone --depth=1 -b main https://github.com/fw876/helloworld.git package/helloworld
           # git -C package/helloworld pull origin main
-          # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/luci-app-passwall2
+          git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
           # git clone https://github.com/sbwml/luci-app-alist package/alist
-          mkdir package/luci-app-openclash
-          cd package/luci-app-openclash
-          git init
-          git remote add -f origin https://github.com/vernesong/OpenClash.git
-          git config core.sparsecheckout true
-          echo "luci-app-openclash" >> .git/info/sparse-checkout
-          git pull --depth 1 origin master
-          git branch --set-upstream-to=origin/master master
+          # mkdir package/luci-app-openclash
+          # cd package/luci-app-openclash
+          # git init
+          # git remote add -f origin https://github.com/vernesong/OpenClash.git
+          # git config core.sparsecheckout true
+          # echo "luci-app-openclash" >> .git/info/sparse-checkout
+          # git pull --depth 1 origin master
+          # git branch --set-upstream-to=origin/master master
          
           
       - name: Update feeds
@@ -78,7 +78,9 @@ jobs:
           # sed -i '$a src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git' feeds.conf.default
           # sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
           # sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
-          sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+          sed -i "/helloworld/d" "feeds.conf.default"
+          echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+          # sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
           # sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2' feeds.conf.default
           # sed -i '$a src-git alist https://github.com/sbwml/luci-app-alist' feeds.conf.default
           # sed -i '$a src-git dockerce https://github.com/docker/docker-ce' feeds.conf.default
@@ -171,7 +173,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
           # CONFIG_PACKAGE_luci-app-ssr-mudb-server=y
-          # CONFIG_PACKAGE_luci-app-passwall=y
+          CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall2=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria=y
           CONFIG_PACKAGE_luci-app-privoxy=y
