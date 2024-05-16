@@ -48,8 +48,6 @@ jobs:
           
       - name: Checkout OpenWrt
         uses: actions/checkout@v3
-        with:
-          node-version: '20.x' # Specify Node.js 20
     # Add additional steps for your build process
       - name: 自定义插件
         run: |
