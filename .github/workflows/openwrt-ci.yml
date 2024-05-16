@@ -66,6 +66,7 @@ jobs:
           # git clone --depth=1 -b main https://github.com/fw876/helloworld.git package/helloworld
           # git -C package/helloworld pull origin main
           git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
+          git clone --depth=1 https://github.com/vernesong/OpenClash.git package/luci-app-openclash
           # git clone https://github.com/sbwml/luci-app-alist package/alist
           # mkdir package/luci-app-openclash
           # cd package/luci-app-openclash
@@ -162,7 +163,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-clash=y
           # CONFIG_PACKAGE_luci-app-cifsd=y
           cat >> .config <<EOF
-          # CONFIG_PACKAGE_luci-app-openclash=y
+          CONFIG_PACKAGE_luci-app-openclash=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
