@@ -145,7 +145,7 @@ jobs:
           CONFIG_PACKAGE_ipv6helper=y           # ipv6 帮助
           CONFIG_PACKAGE_odhcp6c=y              # ipv6 dhcp
           CONFIG_PACKAGE_odhcp6c_ext_prefix_class=0
-          CONFIG_PACKAGE_odhcp6c_ext_cer_id=0   # 暂时未知
+          # CONFIG_PACKAGE_odhcp6c_ext_cer_id=0   暂时未知
           CONFIG_PACKAGE_odhcpd-ipv6only=y      # 仅ipv6 dhcp
           CONFIG_PACKAGE_luci-proto-ipv6=y      # ipv6 端口
           CONFIG_PACKAGE_luci-proto-ppp=y       # ppp 端口
