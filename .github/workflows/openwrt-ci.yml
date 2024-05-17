@@ -47,11 +47,14 @@ jobs:
           sudo -E timedatectl set-timezone "Asia/Shanghai"
           
       - name: Checkout OpenWrt
-      - uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v4 # 更新为支持 Node.js 20 的版本
         with:
-          node-version: '22.x'
+          fetch-depth: 0
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
 
 
     # Add additional steps for your build process
