@@ -1,0 +1,30 @@
+name: Auto Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天凌晨0点运行一次
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: https://github.com/coolsnowwolf/lede
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/coolsnowwolf/lede.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Merge upstream changes
+        run: git merge upstream/master
+
+      - name: Push changes
+        run: |
+          git push origin master
