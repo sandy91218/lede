@@ -16,6 +16,10 @@ jobs:
           repository: sandy91218/lede
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set Git identity
+        run: |
+          git config --global user.email "sandy91218@163.com"
+          git config --global user.name "sandy"
       - name: Add upstream remote
         run: git remote add upstream https://github.com/coolsnowwolf/lede.git
 
