@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/coolsnowwolf/lede
+          repository: coolsnowwolf/lede
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add upstream remote
