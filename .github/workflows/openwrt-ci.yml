@@ -50,6 +50,7 @@ jobs:
       - name: Checkout OpenWrt
         uses: actions/checkout@v4 # 更新为支持 Node.js 20 的版本
         with:
+          ref: master
           fetch-depth: 0
           
       - name: cache
@@ -275,7 +276,8 @@ jobs:
           EOF
           
       - name: Generate configuration file
-        run: make defconfig
+        run: echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; make defconfig
+ #       run: make defconfig
 
       - name: Download packages
         run: make download -j16
