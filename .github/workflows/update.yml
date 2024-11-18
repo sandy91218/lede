@@ -1,0 +1,38 @@
+name: Auto Sync Fork
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # 每天凌晨0点运行一次
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set Git identity
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "your-username"
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/original/repo.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Merge upstream changes
+        run: |
+          git merge upstream/master --allow-unrelated-histories -X theirs || true
+          git status
+          if git ls-files -u | grep -q '^'; then
+            echo "Merge conflicts detected, please resolve them manually."
+            exit 1
+          fi
+
+      - name: Push changes
+        if: success()
+        run: git push origin master
