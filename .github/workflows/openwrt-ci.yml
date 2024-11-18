@@ -38,7 +38,7 @@ jobs:
       - name: cache
         uses: klever1988/cachewrtbuild@main
         with:
-          ccache: false
+          ccache: true
           toolchain: true
           skip: true
           clean: false
