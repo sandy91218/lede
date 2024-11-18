@@ -24,6 +24,7 @@ jobs:
         uses: klever1988/cachewrtbuild@main
         with:
           ccache: 'true'
+          mixkey: 'lede'
           
       - name: Space cleanup and Initialization environment
         env:
