@@ -15,11 +15,11 @@ jobs:
 
       - name: Set Git identity
         run: |
-          git config --global user.email "your-email@example.com"
-          git config --global user.name "your-username"
+          git config --global user.email "sandy91218@163.com"
+          git config --global user.name "sandy"
 
       - name: Add upstream remote
-        run: git remote add upstream https://github.com/original/repo.git
+        run: git remote add upstream https://github.com/coolsnowwolf/lede.git
 
       - name: Fetch upstream
         run: git fetch upstream
