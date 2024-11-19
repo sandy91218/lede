@@ -25,7 +25,7 @@ jobs:
         with:
           ccache: 'true'
 #          prefix: /dev/shm/openwrt
-          mixkey: 'lede'
+          mixkey: 'X86'
           
       - name: Space cleanup and Initialization environment
         env:
