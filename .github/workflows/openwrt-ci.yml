@@ -19,11 +19,33 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
+      - name: Check permissions for /mnt
+        run: ls -ld /mnt
+
+      - name: Check permissions for /home
+        run: ls -ld /home
+
+      - name: Check permissions for /dev/shm
+        run: ls -ld /dev/shm
+
+      - name: Check permissions for /run
+        run: ls -ld /run
+
+      - name: Check permissions for /run/lock
+        run: ls -ld /run/lock
+
+      - name: Check permissions for /boot/efi
+        run: ls -ld /boot/efi
+
+      - name: Check permissions for /run/user/1001
+        run: ls -ld /run/user/1001
+
+      - name: Check permissions for /run/qemu
+        run: ls -ld /run/qemu
 
       - name: Create directory
         run: mkdir -p /mnt/openwrt
-      - name: Check permissions
-        run: ls -ld /mnt
+
 
 
       - name: cache
