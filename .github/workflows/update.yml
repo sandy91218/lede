@@ -32,3 +32,6 @@ jobs:
             echo "Merge conflicts detected, please resolve them manually."
             exit 1
           fi
+      - name: Push changes
+        if: success()
+        run: git push origin master
