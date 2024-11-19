@@ -60,7 +60,3 @@ jobs:
       - name: Check space usage
         if: (!cancelled())
         run: df -hT
-
-      - name: Check space usage
-        if: (!cancelled())
-        run: df -hT
