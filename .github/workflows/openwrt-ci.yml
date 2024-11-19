@@ -20,6 +20,12 @@ jobs:
           ref: master
           fetch-depth: 0
 
+      - name: Create directory
+        run: mkdir -p /mnt/openwrt
+      - name: Check permissions
+        run: ls -ld /mnt
+
+
       - name: cache
         uses: klever1988/cachewrtbuild@main
         with:
