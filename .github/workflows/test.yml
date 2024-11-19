@@ -45,16 +45,7 @@ jobs:
 
           df -h
 
-      - name: Create toolchain directory
-        run: mkdir -p /dev/shm/openwrt_toolchain
-      - name: Create a test file
-        run: echo "This is a test file" > /dev/shm/openwrt_toolchain/test_file.txt
-      - name: List files in the directory
-        run: ls -l /dev/shm/openwrt_toolchain
-      - name: Delete the test file
-        run: rm /dev/shm/openwrt_toolchain/test_file.txt
-      - name: List files in the directory after deletion
-        run: ls -l /dev/shm/openwrt_toolchain
+
       - name: Update feeds
         run: |
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
@@ -69,10 +60,10 @@ jobs:
       - name: Download packages
         run: make download -j16
       - name: Build toolchain
-        run: make toolchain/install -j$(nproc) STAGING_DIR=/dev/shm/openwrt_toolchain
+        run: make toolchain/install -j$(nproc) STAGING_DIR=/mnt/openwrt_toolchain
       - name: Compile firmware
         run: |
-          run: make -j$(nproc) STAGING_DIR=/dev/shm/openwrt_toolchain
+          run: make -j$(nproc) STAGING_DIR=/mnt/openwrt_toolchain
           echo "======================="
           echo "Space usage:"
           echo "======================="
