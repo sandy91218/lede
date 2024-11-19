@@ -19,38 +19,12 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - name: Check permissions for /mnt
-        run: ls -ld /mnt
-
-      - name: Check permissions for /home
-        run: ls -ld /home
-
-      - name: Check permissions for /dev/shm
-        run: ls -ld /dev/shm
-
-      - name: Check permissions for /run
-        run: ls -ld /run
-
-      - name: Check permissions for /run/lock
-        run: ls -ld /run/lock
-
-      - name: Check permissions for /boot/efi
-        run: ls -ld /boot/efi
-
-      - name: Check permissions for /run/user/1001
-        run: ls -ld /run/user/1001
-
-
-      - name: Create directory
-        run: mkdir -p /dev/shm/openwrt
-
-
 
       - name: cache
         uses: klever1988/cachewrtbuild@main
         with:
           ccache: 'true'
-          prefix: /dev/shm/openwrt
+#          prefix: /dev/shm/openwrt
           mixkey: 'lede'
           
       - name: Space cleanup and Initialization environment
