@@ -40,8 +40,6 @@ jobs:
       - name: Check permissions for /run/user/1001
         run: ls -ld /run/user/1001
 
-      - name: Check permissions for /run/qemu
-        run: ls -ld /run/qemu
 
       - name: Create directory
         run: mkdir -p /dev/shm/openwrt
