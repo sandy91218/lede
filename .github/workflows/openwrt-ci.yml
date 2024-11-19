@@ -75,13 +75,6 @@ jobs:
       - name: Check space usage
         if: (!cancelled())
         run: df -hT
-      - name: Post job cleanup
-        run: |
-          rm -rf ./build/tmp
-          rm -rf ./bin/*
-      - name: Check space usage
-        if: (!cancelled())
-        run: df -hT
      
       - name: Prepare artifact
         run: |
