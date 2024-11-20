@@ -65,7 +65,7 @@ jobs:
             octokit.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: "openwrt-ci.yml",
+              workflow_id: "Build OpenWrt Firmware",
               ref: "master"
             });
         env:
