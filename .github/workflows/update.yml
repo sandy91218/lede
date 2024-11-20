@@ -57,7 +57,7 @@ jobs:
 
       - name: Trigger openwrt-ci workflow
         if: env.hashes_differ == 'true'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const { Octokit } = require("@octokit/rest");
@@ -65,7 +65,7 @@ jobs:
             octokit.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: "Build OpenWrt Firmware",
+              workflow_id: "openwrt-ci.yml",
               ref: "master"
             });
         env:
