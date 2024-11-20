@@ -54,6 +54,9 @@ jobs:
       - name: Push changes
         if: env.hashes_differ == 'true'
         run: git push origin master
+      - name: Install @octokit/rest
+        run: npm install @octokit/rest
+
 
       - name: Trigger openwrt-ci workflow
         if: env.hashes_differ == 'true'
