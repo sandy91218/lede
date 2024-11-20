@@ -7,13 +7,7 @@ on:
 
 permissions:
   contents: read
-env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
-  UPLOAD_BIN_DIR: false
-  UPLOAD_FIRMWARE: true
-  UPLOAD_RELEASE: true
-  
+
 jobs:
   build_openwrt:
     name: Build OpenWrt Firmware
@@ -57,8 +51,6 @@ jobs:
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          ./scripts/feeds update helloworld
-          ./scripts/feeds install -a -f -p helloworld
 
       - name: Generate configuration file
         run: |
@@ -109,6 +101,3 @@ jobs:
         with:
           name: OpenWrt_firmware
           path: ./bin/targets/
-          delete_tags: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
