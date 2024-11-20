@@ -2,7 +2,7 @@ name: Auto Sync Fork
 
 on:
   schedule:
-    - cron: "0 0 * * *" # 每天凌晨0点运行一次
+    - cron: "0 0 * * *" # 每天凌晨 0 点运行一次
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -24,7 +24,25 @@ jobs:
       - name: Fetch upstream
         run: git fetch upstream
 
+      - name: Get latest commit hash from upstream
+        id: get_upstream_hash
+        run: echo "upstream_commit=$(git rev-parse upstream/master)" >> $GITHUB_OUTPUT
+
+      - name: Get latest commit hash from origin
+        id: get_origin_hash
+        run: echo "origin_commit=$(git rev-parse origin/master)" >> $GITHUB_OUTPUT
+
+      - name: Compare commit hashes
+        id: compare_hashes
+        run: |
+          if [ "${{ steps.get_upstream_hash.outputs.upstream_commit }}" != "${{ steps.get_origin_hash.outputs.origin_commit }}" ]; then
+            echo "hashes_differ=true" >> $GITHUB_ENV
+          else
+            echo "hashes_differ=false" >> $GITHUB_ENV
+          fi
+
       - name: Merge upstream changes
+        if: env.hashes_differ == 'true'
         run: |
           git merge upstream/master --allow-unrelated-histories -X ours || true
           git status
@@ -32,6 +50,23 @@ jobs:
             echo "Merge conflicts detected, please resolve them manually."
             exit 1
           fi
+
       - name: Push changes
-        if: success()
+        if: env.hashes_differ == 'true'
         run: git push origin master
+
+      - name: Trigger openwrt-ci workflow
+        if: env.hashes_differ == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { Octokit } = require("@octokit/rest");
+            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+            octokit.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "openwrt-ci.yml",
+              ref: "master"
+            });
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
