@@ -24,7 +24,7 @@ jobs:
         uses: klever1988/cachewrtbuild@main
         with:
           ccache: 'true'
-          mixkey: 'X64'
+          mixkey: 'X86'
 
       - name: Space cleanup and Initialization environment
         env:
