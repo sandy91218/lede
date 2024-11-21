@@ -48,7 +48,7 @@ jobs:
           echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
 
       - name: Merge upstream changes
-        if: env.hashes_differ == 'true'
+        if: steps.cacheHash.outputs.cache-hit != 'true'
         run: |
           git merge upstream/master --allow-unrelated-histories -X ours || true
           git status
@@ -58,11 +58,11 @@ jobs:
           fi
 
       - name: Push changes
-        if: env.hashes_differ == 'true'
+        if: steps.cacheHash.outputs.cache-hit != 'true'
         run: git push origin master
 
       - name: Trigger repository_dispatch
-        if: env.hashes_differ == 'true'
+        if: steps.cacheHash.outputs.cache-hit != 'true'
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
