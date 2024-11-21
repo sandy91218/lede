@@ -54,6 +54,12 @@ jobs:
       - name: Push changes
         if: env.hashes_differ == 'true'
         run: git push origin master
+      - name: Trigger repository_dispatch
+        if: env.hashes_differ == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: Source Code Update
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@v2
         with:
