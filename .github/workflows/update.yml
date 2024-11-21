@@ -16,16 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set Git identity
-        run: |
-          git config --global user.email "sandy91218@163.com"
-          git config --global user.name "sandy"
 
-      - name: Add upstream remote
-        run: git remote add upstream https://github.com/coolsnowwolf/lede.git
-
-      - name: Fetch upstream
-        run: git fetch upstream
       - name: Get Commit Hash
         id: getHash
         run: |
@@ -43,7 +34,16 @@ jobs:
         if: steps.cacheHash.outputs.cache-hit != 'true'
         run: |
           echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
+      - name: Set Git identity
+        run: |
+          git config --global user.email "sandy91218@163.com"
+          git config --global user.name "sandy"
 
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/coolsnowwolf/lede.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
       - name: Merge upstream changes
         if: env.hashes_differ == 'true'
         run: |
