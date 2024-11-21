@@ -4,7 +4,8 @@ on:
   schedule:
     - cron: "0 9 */6 * *" # 每六天早上9点运行一次
   workflow_dispatch: # 允许手动触发
-
+  repository_dispatch:
+  
 permissions:
   contents: read
 
