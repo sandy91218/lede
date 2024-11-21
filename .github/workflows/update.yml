@@ -1,5 +1,8 @@
 name: Auto Sync Fork
-
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+  
 on:
   schedule:
     - cron: "0 0 * * *" # 每天凌晨 0 点运行一次
@@ -23,23 +26,23 @@ jobs:
 
       - name: Fetch upstream
         run: git fetch upstream
-
-      - name: Get latest commit hash from upstream
-        id: get_upstream_hash
-        run: echo "upstream_commit=$(git rev-parse upstream/master)" >> $GITHUB_OUTPUT
-
-      - name: Get latest commit hash from origin
-        id: get_origin_hash
-        run: echo "origin_commit=$(git rev-parse origin/master)" >> $GITHUB_OUTPUT
-
-      - name: Compare commit hashes
-        id: compare_hashes
+      - name: Get Commit Hash
+        id: getHash
         run: |
-          if [ "${{ steps.get_upstream_hash.outputs.upstream_commit }}" != "${{ steps.get_origin_hash.outputs.origin_commit }}" ]; then
-            echo "hashes_differ=true" >> $GITHUB_ENV
-          else
-            echo "hashes_differ=false" >> $GITHUB_ENV
-          fi
+          git clone --depth 1 $REPO_URL -b $REPO_BRANCH .
+          echo "commitHash=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Compare Commit Hash
+        id: cacheHash
+        uses: actions/cache@v4
+        with:
+          path: .commitHash
+          key: commitHash_${{ steps.getHash.outputs.commitHash }}
+
+      - name: Save New Commit Hash
+        if: steps.cacheHash.outputs.cache-hit != 'true'
+        run: |
+          echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
 
       - name: Merge upstream changes
         if: env.hashes_differ == 'true'
