@@ -1,8 +1,9 @@
 name: Auto Sync Fork
+
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  
+
 on:
   schedule:
     - cron: "0 0 * * *" # 每天凌晨 0 点运行一次
@@ -16,6 +17,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set Git identity
+        run: |
+          git config --global user.email "sandy91218@163.com"
+          git config --global user.name "sandy"
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/coolsnowwolf/lede.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Clean target directory
+        run: |
+          rm -rf ./*
 
       - name: Get Commit Hash
         id: getHash
@@ -34,16 +49,7 @@ jobs:
         if: steps.cacheHash.outputs.cache-hit != 'true'
         run: |
           echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
-      - name: Set Git identity
-        run: |
-          git config --global user.email "sandy91218@163.com"
-          git config --global user.name "sandy"
 
-      - name: Add upstream remote
-        run: git remote add upstream https://github.com/coolsnowwolf/lede.git
-
-      - name: Fetch upstream
-        run: git fetch upstream
       - name: Merge upstream changes
         if: env.hashes_differ == 'true'
         run: |
@@ -57,12 +63,14 @@ jobs:
       - name: Push changes
         if: env.hashes_differ == 'true'
         run: git push origin master
+
       - name: Trigger repository_dispatch
         if: env.hashes_differ == 'true'
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           event-type: Source Code Update
+
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@v2
         with:
