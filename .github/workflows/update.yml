@@ -1,0 +1,75 @@
+name: Auto Sync Fork
+
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+
+on:
+  schedule:
+    - cron: "0 10 */3 * *" # 每3天凌晨 10 点运行一次
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Git identity
+        run: |
+          git config --global user.email "sandy91218@163.com"
+          git config --global user.name "sandy"
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/coolsnowwolf/lede.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Get Commit Hash
+        id: getHash
+        run: |
+          git clone --depth 1 $REPO_URL -b $REPO_BRANCH repo
+          cd repo
+          echo "commitHash=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Compare Commit Hash
+        id: cacheHash
+        uses: actions/cache@v4
+        with:
+          path: .commitHash
+          key: commitHash_${{ steps.getHash.outputs.commitHash }}
+
+      - name: Save New Commit Hash
+        if: steps.cacheHash.outputs.cache-hit != 'true'
+        run: |
+          echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
+
+      - name: Merge upstream changes
+        if: steps.cacheHash.outputs.cache-hit != 'true'
+        run: |
+          git merge upstream/master --allow-unrelated-histories -X ours || true
+          git status
+          if git ls-files -u | grep -q '^'; then
+            echo "Merge conflicts detected, please resolve them manually."
+            exit 1
+          fi
+
+      - name: Push changes
+        if: steps.cacheHash.outputs.cache-hit != 'true'
+        run: git push origin master
+
+      - name: Trigger repository_dispatch
+        if: steps.cacheHash.outputs.cache-hit != 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: Source Code Update
+
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          retain_days: 0
+          keep_minimum_runs: 3
