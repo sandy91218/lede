@@ -76,6 +76,12 @@ jobs:
       - name: Check space usage
         if: (!cancelled())
         run: df -hT
+        
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenWrt_package
+          path: ./artifact/package/
      
       - name: Prepare artifact
         run: |
@@ -91,11 +97,7 @@ jobs:
           name: OpenWrt_buildinfo
           path: ./artifact/buildinfo/
 
-      - name: Upload package
-        uses: actions/upload-artifact@v4
-        with:
-          name: OpenWrt_package
-          path: ./artifact/package/
+
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
